@@ -68,7 +68,7 @@ export default function DashboardModule( { moduleId, title, children, isActive, 
 					{ labels.map( ( tag ) => {
 						const { name, color } = labelsList[ tag ];
 						return tag !== 'beta' &&
-						<Tag key={ tag } className={ `midSize smallText mr-s ${ ! color && 'bg-grey-lighter' }` } style={ color && { backgroundColor: color } }>{ name }</Tag>;
+						<Tag key={ tag } className={ `midSize smallText mr-s ${ ! color ? 'bg-grey-lighter' : '' }` } style={ color && { backgroundColor: color } }>{ name }</Tag>;
 					} ) }
 				</div>
 				}

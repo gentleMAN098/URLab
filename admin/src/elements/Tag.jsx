@@ -8,7 +8,7 @@ export default function Tag( { props, type, fullSize, className, children, style
 				{ children }
 				{ onDelete && <Close onClick={ onDelete } className="urlslab-tag-close" /> }
 			</button>
-			: <span { ...props } className={ `urlslab-tag ${ fullSize ? 'fullSize' : '' } ${ className || '' } ${ size || '' } ${ shape || '' } ${ fill && 'fill' }` } style={ style }>
+			: <span { ...props } className={ `urlslab-tag ${ fullSize ? 'fullSize' : '' } ${ className ? className : '' } ${ size || '' } ${ shape || '' } ${ fill && 'fill' }` } style={ style }>
 				{ children }
 				{ onDelete && <Close onClick={ onDelete } className="urlslab-tag-close" /> }
 			</span>
