@@ -1,10 +1,12 @@
 import { create } from 'zustand';
 import { get, update } from 'idb-keyval';
-
-const useMainMenuStore = create((set) => ({
-  activePage: 'urlslab-modules',
-  setPage: (activePage) => set({ activePage }),
-}));
+import { subscribeWithSelector } from 'zustand/middleware';
+const useMainMenuStore = create(
+  subscribeWithSelector((set) => ({
+    activePage: 'urlslab-modules',
+    setPage: (activePage) => set({ activePage }),
+  }))
+);
 
 export default function useMainMenu() {
   const activePage = useMainMenuStore((state) => state.activePage);
