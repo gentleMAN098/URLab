@@ -137,35 +137,10 @@ export default function App() {
             modules={!fetchedModules || Object.values(fetchedModules)}
           />
         </Suspense>
-      )}
+      )}d
 
       <div className="urlslab-app-main">
-        <label htmlFor="all">
-          selectAll
-          <input
-            name="all"
-            type="checkbox"
-            checked={isAllSelected}
-            onChange={() => toggleSelectAllItems()}
-          />
-        </label>
-        {items.map((item) => (
-          <label htmlFor={item.title}>
-            {item.title}
-            <input
-              name={item.title}
-              type="checkbox"
-              checked={item.isSelected}
-              onChange={() => toggleSelectItem(item)}
-            />
-          </label>
-        ))}
         <Header fetchedModules={fetchedModules} />
-
-        <h2>selected Items</h2>
-        {selectedItems.map((item) => (
-          <p>{item.title}</p>
-        ))}
         <DynamicModule
           modules={!fetchedModules || Object.values(fetchedModules)}
         />

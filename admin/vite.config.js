@@ -4,18 +4,18 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 
-const hash = ( Math.random() + 1 ).toString( 36 ).substring( 2 );
+const hash = (Math.random() + 1).toString(36).substring(2);
 
 // https://vitejs.dev/config/
-export default defineConfig( {
+export default defineConfig({
 	base: './',
 	plugins: [
 		ViteImageOptimizer(),
 		svgr(),
-		react( {
+		react({
 			jsxRuntime: 'classic',
-		} ),
-		VitePluginFonts( {
+		}),
+		VitePluginFonts({
 			google: {
 				families: [
 					{
@@ -28,9 +28,9 @@ export default defineConfig( {
 					},
 				],
 			},
-		} ),
+		}),
 	],
-	worker: [ react() ],
+	worker: [react()],
 	server: {
 		port: 1337,
 	},
@@ -43,12 +43,18 @@ export default defineConfig( {
 			},
 			output: {
 				// this gets rid of the hash on main.css
-				entryFileNames: `[name]-${ hash }.js`,
-				chunkFileNames: `assets/[name]-${ hash }.js`,
-				assetFileNames: `assets/[name]-${ hash }.[ext]`,
+				entryFileNames: `[name]-${hash}.js`,
+				chunkFileNames: `assets/[name]-${hash}.js`,
+				assetFileNames: `assets/[name]-${hash}.[ext]`,
 			},
 		},
 		// prevent some warnings
 		chunkSizeWarningLimit: 60000,
+		watch: {
+			exclude: 'node_modules/**',
+			include: 'src/**',
+			skipWrite: true,
+		}
 	},
-} );
+
+});

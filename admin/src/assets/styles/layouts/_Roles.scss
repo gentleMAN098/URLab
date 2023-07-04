@@ -1,0 +1,58 @@
+@use "../common/mixins" as *;
+@use "../common/variables" as *;
+
+.urlslab-roles {
+
+    background: red;
+
+	&-section {
+		position: relative;
+		margin: 1.5em;
+		max-width: 70.75em;
+
+		&.active {
+			z-index: 2;
+		}
+
+		&:last-of-type {
+			margin-bottom: 3em;
+		}
+	}
+
+	&-option {
+		position: relative;
+	}
+
+	@media (min-width: $breakpoint-tablet-landscape) {
+
+		&-section {
+			margin: 1.5em auto 0;
+		}
+
+		&-desc,
+		&-options {
+			width: calc(50% - 3em);
+		}
+
+		&-desc {
+			padding-left: 2em;
+		}
+
+		&-options {
+			padding-top: 2em;
+			margin-left: auto;
+		}
+	}
+
+	.urlslab-inputField-wrap {
+		margin-bottom: 0;
+	}
+
+	&-option__desc {
+		font-size: 0.6875rem;
+		margin-top: 0.25em;
+		margin-bottom: 1.5em;
+		padding-right: 7.25em;
+		color: $grey-darker;
+	}
+}

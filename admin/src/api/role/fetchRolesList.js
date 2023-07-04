@@ -1,5 +1,7 @@
+/* global wpApiSettings */
+
 export async function fetchRolesList(slug) {
-  await fetch('/urlslab/wp-json/urlslab/v1/permission/role', {
+  await fetch(wpApiSettings.root + 'urlslab/v1/permission/role', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -12,6 +14,6 @@ export async function fetchRolesList(slug) {
       return response.json();
     })
     .then((posts) => {
-      console.log(posts);
+      console.log(posts, 'posts');
     });
 }
