@@ -1,5 +1,5 @@
 export async function createRole(slug) {
-  await fetch('/wp-json/urlslab/v1/permission/role', {
+  await fetch('/urlab/wp-json/urlslab/v1/permission/role', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

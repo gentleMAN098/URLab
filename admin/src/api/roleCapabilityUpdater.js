@@ -1,5 +1,5 @@
 export async function roleCapabilityUpdater() {
-  await fetch('/wp-json/urlslab/v1/permission/user/208', {
+  await fetch('/urlslab/wp-json/urlslab/v1/permission/user/208', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

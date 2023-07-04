@@ -1,5 +1,5 @@
 export async function fetchCapabilitiesList() {
-  await fetch('/wp-json/urlslab/v1/permission/capability', {
+  await fetch('/urlslab/wp-json/urlslab/v1/permission/capability', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

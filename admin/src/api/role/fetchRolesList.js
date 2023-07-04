@@ -1,5 +1,5 @@
 export async function fetchRolesList(slug) {
-  await fetch('/wp-json/urlslab/v1/permission/role', {
+  await fetch('/urlslab/wp-json/urlslab/v1/permission/role', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

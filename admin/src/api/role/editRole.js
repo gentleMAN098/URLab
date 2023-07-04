@@ -1,5 +1,5 @@
 export async function editRole(slug) {
-  await fetch('/wp-json/urlslab/v1/permission/role/nova_rola', {
+  await fetch('/urlslab/wp-json/urlslab/v1/permission/role/nova_rola', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

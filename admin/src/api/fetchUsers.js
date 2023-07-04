@@ -1,5 +1,5 @@
 export async function fetchUsers() {
-  await fetch('/wp-json/urlslab/v1/permission/user', {
+  await fetch('/urlslab/wp-json/urlslab/v1/permission/user', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
