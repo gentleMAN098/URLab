@@ -2,6 +2,13 @@
 @use "../common/variables" as *;
 
 .urlslab-roles {
+    
+
+
+	.urlslab-tableContainer {
+		max-width: 440px;
+	}
+
 	&-section {
 		position: relative;
 		margin: 1.5em;
@@ -30,26 +37,9 @@
 		&-options {
 			width: calc(50% - 3em);
 		}
-
-		&-desc {
-			padding-left: 2em;
-		}
-
-		&-options {
-			padding-top: 2em;
-			margin-left: auto;
-		}
 	}
 
 	.urlslab-inputField-wrap {
 		margin-bottom: 0;
-	}
-
-	&-option__desc {
-		font-size: 0.6875rem;
-		margin-top: 0.25em;
-		margin-bottom: 1.5em;
-		padding-right: 7.25em;
-		color: $grey-darker;
 	}
 }

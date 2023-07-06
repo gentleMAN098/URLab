@@ -1,16 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
-import { getFetch } from '../api/fetching';
-import ModuleViewHeaderBottom from '../components/ModuleViewHeaderBottom';
-import Table from '../components/TableComponent';
-import { createColumnHelper } from '@tanstack/react-table';
+import { useEffect, useMemo, useState } from "react";
+import { getFetch } from "../api/fetching";
+import ModuleViewHeaderBottom from "../components/ModuleViewHeaderBottom";
+import Table from "../components/TableComponent";
+import { createColumnHelper } from "@tanstack/react-table";
 
 export default function UserTable() {
-  const userSlug = 'permission/user';
-  const capabilitiesSlug = 'permission/capabilities';
+  const userSlug = "permission/user";
+  const capabilitiesSlug = "permission/capabilities";
 
   const header = {
-    name: 'Name',
-    modules: 'Allowed',
+    name: "Name",
+    modules: "Allowed",
   };
   const [roles, setRoles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,15 +21,17 @@ export default function UserTable() {
       const userData = await userRes.json();
       const capabilitiesRes = await getFetch(capabilitiesSlug);
       const capabilitiesData = await capabilitiesRes.json();
-      console.log('capabilitiesData', capabilitiesData);
-      console.log('userData', userData);
+      console.log("capabilitiesData", capabilitiesData);
+      console.log("userData", userData);
       const normalizeTableData = userData.reduce((acc, cur) => {
         acc = [
           ...acc,
           {
             label: cur.role.name,
             capabilities: Object.keys(cur.role.capabilities).length,
-            capabilitie: capabilitiesData.filter((it) => it.roles[0] === cur.role_key).length,
+            capabilitie: capabilitiesData.filter(
+              (it) => it.roles[0] === cur.role_key
+            ).length,
           },
         ];
         return acc;
@@ -48,7 +50,11 @@ export default function UserTable() {
 
   const columnHelper = useMemo(() => createColumnHelper(), []);
 
-  const columns = [columnHelper.accessor('User'), columnHelper.accessor('Capabilities'), columnHelper.accessor('Role')];
+  const columns = [
+    columnHelper.accessor("User"),
+    columnHelper.accessor("Capabilities"),
+    columnHelper.accessor("Role"),
+  ];
 
   return (
     <>
@@ -59,9 +65,9 @@ export default function UserTable() {
         noFiltering
         noCount
         hideActions
-        options={{ header, notWide: true, title: 'Add user', id: 'name' }}
+        options={{ header, notWide: true, title: "Add user", id: "name" }}
       />
-      <div>
+      <div className="urlslab-tableContainer">
         <Table
           className="fadeInto"
           slug={capabilitiesSlug}

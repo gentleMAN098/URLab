@@ -1,16 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
-import { getFetch } from '../api/fetching';
-import ModuleViewHeaderBottom from '../components/ModuleViewHeaderBottom';
-import Table from '../components/TableComponent';
-import { createColumnHelper } from '@tanstack/react-table';
+import { useEffect, useMemo, useState } from "react";
+import { getFetch } from "../api/fetching";
+import ModuleViewHeaderBottom from "../components/ModuleViewHeaderBottom";
+import Table from "../components/TableComponent";
+import { createColumnHelper } from "@tanstack/react-table";
 
 export default function RoleTable() {
-  const roleSlug = 'permission/role';
-  const userSlug = 'permission/user';
+  const roleSlug = "permission/role";
+  const userSlug = "permission/user";
 
   const header = {
-    name: 'Name',
-    modules: 'Allowed',
+    name: "Name",
+    modules: "Allowed",
   };
   const [roles, setRoles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,14 +26,13 @@ export default function RoleTable() {
         acc = [
           ...acc,
           {
-            label: cur.role.name,
-            capabilities: Object.keys(cur.role.capabilities).length,
-            user: userData.filter((it) => it.roles[0] === cur.role_key).length,
+            Role: cur.role.name,
+            Capabilities: Object.keys(cur.role.capabilities).length,
+            User: userData.filter((it) => it.roles[0] === cur.role_key).length,
           },
         ];
         return acc;
       }, []);
-      console.log('normalizeTableData', normalizeTableData);
       setRoles(normalizeTableData);
       setIsLoading(false);
     } catch (e) {
@@ -47,11 +46,14 @@ export default function RoleTable() {
 
   const columnHelper = useMemo(() => createColumnHelper(), []);
 
-  const columns = [
-    columnHelper.accessor('Role'),
-    columnHelper.accessor('Capabilities'),
-    columnHelper.accessor('Users'),
-  ];
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor("Role"),
+      columnHelper.accessor("Capabilities"),
+      columnHelper.accessor("User"),
+    ],
+    []
+  );
 
   return (
     <>
@@ -62,17 +64,21 @@ export default function RoleTable() {
         noFiltering
         noCount
         hideActions
-        options={{ header, notWide: true, title: 'Add new role', id: 'name' }}
+        options={{ header, notWide: true, title: "Add new role", id: "name" }}
       />
-      <div>
-        <Table
-          className="fadeInto"
-          slug={roleSlug}
-          columns={columns}
-          // returnTable={(returnTable) => console.log('return table:', returnTable)}
-          data={!isLoading && roles.length ? roles : []}
-        ></Table>
-      </div>
+      {!isLoading ? (
+        <div className="urlslab-tableContainer">
+          <Table
+            className="fadeInto"
+            slug={roleSlug}
+            columns={columns}
+            // returnTable={(returnTable) => console.log('return table:', returnTable)}
+            data={roles || []}
+          />
+        </div>
+      ) : (
+        "loading..."
+      )}
     </>
   );
 }

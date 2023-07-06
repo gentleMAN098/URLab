@@ -11,7 +11,6 @@ import ModuleViewHeader from '../components/ModuleViewHeader';
 export default function Roles({ moduleId }) {
   const [activeSection, setActiveSection] = useState('overview');
 
-  console.log('moduleId', moduleId);
   const slug = 'roles';
 
   const RoleTable = lazy(() => import(`../tables/RoleTable.jsx`));
