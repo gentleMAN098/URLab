@@ -50,11 +50,7 @@ export default defineConfig({
 		},
 		// prevent some warnings
 		chunkSizeWarningLimit: 60000,
-		watch: {
-			exclude: 'node_modules/**',
-			include: 'src/**',
-			skipWrite: true,
-		}
+		
 	},
 
 });

@@ -66,19 +66,29 @@ export default function RoleTable() {
         hideActions
         options={{ header, notWide: true, title: "Add new role", id: "name" }}
       />
-      {!isLoading ? (
-        <div className="urlslab-tableContainer">
+
+      <div className="roles-layout">
+        {!isLoading ? (
           <Table
             className="fadeInto"
             slug={roleSlug}
             columns={columns}
-            // returnTable={(returnTable) => console.log('return table:', returnTable)}
+            returnTable={(instance) => console.log("return table:", instance)}
             data={roles || []}
+            getRowExtraProps={(row) => ({
+              onClick: (e) => {
+                row.toggleSelected();
+              },
+              className: row.getIsSelected() ? "bg-blue" : "",
+            })}
           />
+        ) : (
+          "loading..."
+        )}
+        <div className="urlslab-detailsContainer">
+          salam mn container hastam
         </div>
-      ) : (
-        "loading..."
-      )}
+      </div>
     </>
   );
 }

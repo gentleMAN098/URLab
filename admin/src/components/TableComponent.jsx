@@ -7,7 +7,7 @@ import { useVirtual } from 'react-virtual';
 
 import '../assets/styles/components/_TableComponent.scss';
 
-export default function Table({ slug, resizable, children, className, columns, data, initialState, returnTable }) {
+export default function Table({ slug, resizable, children, className, columns, data, initialState, returnTable , getRowExtraProps }) {
   const [rowSelection, setRowSelection] = useState({});
   const [containerWidth, setContainerWidth] = useState();
   const [columnVisibility, setColumnVisibility] = useState(initialState?.columnVisibility || {});
@@ -60,7 +60,7 @@ export default function Table({ slug, resizable, children, className, columns, d
 
   if (table && returnTable) {
     returnTable(table);
-    console.log('table', table);
+    console.log('table', table.getIsSomeRowsSelected());
   }
 
   const tbody = [];
@@ -80,7 +80,7 @@ export default function Table({ slug, resizable, children, className, columns, d
   for (const virtualRow of virtualRows) {
     const row = rows[virtualRow?.index];
     tbody.push(
-      <tr key={row.id} className={row.getIsSelected() ? 'selected' : ''}>
+      <tr  key={row.id} className={row.getIsSelected() ? 'selected' : ''} {...getRowExtraProps?.(row, table)}>
         {row.getVisibleCells().map((cell) => {
           const tooltip = cell.column.columnDef.tooltip;
 
@@ -107,17 +107,17 @@ export default function Table({ slug, resizable, children, className, columns, d
     <div
       className="urlslab-table-container"
       ref={tableContainerRef}
-      style={{
-        width: `${containerWidth}px`,
-        '--tableContainerWidth': `${containerWidth}px`,
-      }}
+      // style={{
+      //   width: `${containerWidth}px`,
+      //   '--tableContainerWidth': `${containerWidth}px`,
+      // }}
     >
-      {containerWidth ? (
+      {/* {containerWidth ? ( */}
         <table
           className={`urlslab-table ${className} ${resizable ? 'resizable' : ''}`}
-          style={{
-            width: table.getCenterTotalSize(),
-          }}
+          // style={{
+          //   width: table.getCenterTotalSize(),
+          // }}
         >
           <thead className="urlslab-table-head">
             {table.getHeaderGroups().map((headerGroup) => (
@@ -161,7 +161,7 @@ export default function Table({ slug, resizable, children, className, columns, d
             )}
           </tbody>
         </table>
-      ) : null}
+      {/* ) : null} */}
 
       {children}
     </div>
