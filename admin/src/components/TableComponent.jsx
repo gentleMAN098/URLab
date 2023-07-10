@@ -23,6 +23,8 @@ export default function Table({
   const [columnVisibility, setColumnVisibility] = useState(initialState?.columnVisibility || {});
   const tableContainerRef = useRef();
 
+  console.log('columnVisibility', columnVisibility);
+
   const getColumnState = useCallback(() => {
     get(slug).then(async (dbData) => {
       if (dbData?.columnVisibility && Object.keys(dbData?.columnVisibility).length) {
