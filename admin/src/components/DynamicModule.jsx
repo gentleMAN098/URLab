@@ -1,12 +1,12 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from "react";
 
-import { renameModule } from '../lib/helpers';
-import useHeaderHeight from '../hooks/useHeaderHeight';
-import useMainMenu from '../hooks/useMainMenu';
+import { renameModule } from "../lib/helpers";
+import useHeaderHeight from "../hooks/useHeaderHeight";
+import useMainMenu from "../hooks/useMainMenu";
 
-import ErrorBoundary from './ErrorBoundary';
-import Loader from './Loader';
-import '../assets/styles/layouts/_DynamicModule.scss';
+import ErrorBoundary from "./ErrorBoundary";
+import Loader from "./Loader";
+import "../assets/styles/layouts/_DynamicModule.scss";
 
 export default function DynamicModule({ modules }) {
   const { activePage } = useMainMenu();
@@ -14,11 +14,18 @@ export default function DynamicModule({ modules }) {
   const headerBottomHeight = useHeaderHeight((state) => state.headerBottomHeight);
 
   const [hasMounted, setHasMounted] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
+  if (!hasMounted || !activePage) {
+    return null;
+  }
   if (!hasMounted || !activePage) {
     return null;
   }

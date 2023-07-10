@@ -2,6 +2,7 @@
 import { useRef, useCallback, useState, useEffect } from 'react';
 import { get } from 'idb-keyval';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 
 import { useVirtual } from 'react-virtual';
 
@@ -30,10 +31,22 @@ export default function Table({
       }
     });
   }, [slug]);
+  const getColumnState = useCallback(() => {
+    get(slug).then(async (dbData) => {
+      if (dbData?.columnVisibility && Object.keys(dbData?.columnVisibility).length) {
+        await setColumnVisibility(dbData?.columnVisibility);
+      }
+    });
+  }, [slug]);
 
   useEffect(() => {
     getColumnState();
+  useEffect(() => {
+    getColumnState();
 
+    setContainerWidth(tableContainerRef.current?.clientWidth);
+    const menuWidth =
+      document.querySelector('.urlslab-mainmenu').clientWidth + document.querySelector('#adminmenuwrap').clientWidth;
     setContainerWidth(tableContainerRef.current?.clientWidth);
     const menuWidth =
       document.querySelector('.urlslab-mainmenu').clientWidth + document.querySelector('#adminmenuwrap').clientWidth;
@@ -47,7 +60,27 @@ export default function Table({
 
     resizeWatcher.observe(document.querySelector('#wpadminbar'));
   }, [getColumnState, setContainerWidth]);
+    resizeWatcher.observe(document.querySelector('#wpadminbar'));
+  }, [getColumnState, setContainerWidth]);
 
+  const table = useReactTable({
+    columns,
+    data,
+    defaultColumn: {
+      minSize: resizable ? 80 : 24,
+      size: resizable ? 100 : 24,
+    },
+    initialState,
+    state: {
+      rowSelection,
+      columnVisibility,
+    },
+    columnResizeMode: 'onChange',
+    enableRowSelection: true,
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+  });
   const table = useReactTable({
     columns,
     data,
@@ -72,7 +105,9 @@ export default function Table({
   }
 
   const tbody = [];
+  const tbody = [];
 
+  const { rows } = table?.getRowModel();
   const { rows } = table?.getRowModel();
 
   const rowVirtualizer = useVirtual({
@@ -80,7 +115,15 @@ export default function Table({
     size: rows?.length,
     overscan: 10,
   });
+  const rowVirtualizer = useVirtual({
+    parentRef: tableContainerRef,
+    size: rows?.length,
+    overscan: 10,
+  });
 
+  const { virtualItems: virtualRows, totalSize } = rowVirtualizer;
+  const paddingTop = virtualRows?.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
+  const paddingBottom = virtualRows?.length > 0 ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0;
   const { virtualItems: virtualRows, totalSize } = rowVirtualizer;
   const paddingTop = virtualRows?.length > 0 ? virtualRows?.[0]?.start || 0 : 0;
   const paddingBottom = virtualRows?.length > 0 ? totalSize - (virtualRows?.[virtualRows.length - 1]?.end || 0) : 0;
@@ -92,6 +135,24 @@ export default function Table({
         {row.getVisibleCells().map((cell) => {
           const tooltip = cell.column.columnDef.tooltip;
 
+          return (
+            cell.column.getIsVisible() && (
+              <td
+                key={cell.id}
+                className={cell.column.columnDef.className}
+                style={{
+                  width: cell.column.getSize() !== 0 && resizable ? cell.column.getSize() : undefined,
+                }}
+              >
+                {tooltip ? flexRender(tooltip, cell.getContext()) : null}
+                <div className="limit">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
+              </td>
+            )
+          );
+        })}
+      </tr>
+    );
+  }
           return (
             cell.column.getIsVisible() && (
               <td
@@ -171,6 +232,9 @@ export default function Table({
       </table>
       {/* ) : null} */}
 
+      {children}
+    </div>
+  );
       {children}
     </div>
   );

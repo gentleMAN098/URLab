@@ -2,6 +2,12 @@ node_modules/
 package-lock.json
 .idea/
 .husky
+
+
+# Public build
+public/build/*/**
+public/build/*
+
 # Numerous always-ignore extensions
 *.diff
 *.err

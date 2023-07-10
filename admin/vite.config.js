@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 
 const hash = (Math.random() + 1).toString(36).substring(2);
+const hash = (Math.random() + 1).toString(36).substring(2);
 
 // https://vitejs.dev/config/
 export default defineConfig({
