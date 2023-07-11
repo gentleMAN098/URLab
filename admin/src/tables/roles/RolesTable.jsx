@@ -56,7 +56,6 @@ export default function RolesTable() {
     refetchOnWindowFocus: false,
   });
 
-  // console.log("items", items);
   const { data: usersData, isLoading: usersLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -132,16 +131,7 @@ export default function RolesTable() {
     });
   };
 
-  /////////////////// how to set this data?? /////////////
-  useEffect(() => {
-    console.log("selected row:", selectedRowData?.id ?? null);
-    //  console.log(rows[0].original);
-  }, []);
 
-  const initialSelectedRow = (rows) => {
-    setSelectedRowData(rows[0].original);
-    rows[0].getIsSelected();
-  };
   return (
     <>
       <ModuleViewHeaderBottom
