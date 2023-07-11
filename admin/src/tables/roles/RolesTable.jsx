@@ -52,7 +52,7 @@ export default function RolesTable() {
     refetchOnWindowFocus: false,
   });
 
-  console.log("selectedRowData", selectedRowData);
+  // console.log("items", items);
   const { data: usersData, isLoading: usersLoading } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
@@ -117,15 +117,18 @@ export default function RolesTable() {
       return { ...filter, [type]: inputValue };
     });
   };
-/////////////////// how to set this data?? /////////////
-  const initialSelectedRow = (rows) => {
-    setSelectedRowData(rows[0].original);
-    rows[0].getIsSelected();
-
-
-  }
-
-
+  
+  
+  /////////////////// how to set this data?? /////////////
+  useEffect(() => {
+ console.log('selected row:', selectedRowData?.id ?? null );
+//  console.log(rows[0].original);
+  }, [])
+  
+const initialSelectedRow = (rows) => {
+  setSelectedRowData(rows[0].original);
+  rows[0].getIsSelected();
+}
   return (
     <>
       <ModuleViewHeaderBottom
@@ -137,27 +140,41 @@ export default function RolesTable() {
         hideActions
         options={{ header, notWide: true, title: 'Add new role', id: 'name' }}
       />
-
       <div className="roles-layout">
         <Table
           className="fadeInto"
           slug={roleSlug}
           columns={columns}
           data={!rolesLoading ? normalizeTableData : []}
-          getRowExtraProps={(row, rows) => ({
-
-            onClick: (e) => {
-              console.log('row', row, 'rows', rows);
-              row.toggleSelected();
-              setSelectedRowData(row.original);
-
+          getRowExtraProps={(row, rows) =>{
+            return {
+              onClick: (e) => {
+                console.log('row', row, 'rows', rows);
+                row.toggleSelected();
+                setSelectedRowData(row.original);
                 rows.map((item) => {
                   if (item.getIsSelected() && item.id !== row.id) {
                     item.toggleSelected();
                   }
                 });
               },
-          })}
+            };
+          }} 
+          // ({
+          //   /////////////???????/////
+          //   // initialState: {()},
+          //   // onLoad: ?????,
+          //   onClick: (e) => {
+          //     console.log('row', row, 'rows', rows);
+          //     row.toggleSelected();
+          //     setSelectedRowData(row.original);
+          //       rows.map((item) => {
+          //         if (item.getIsSelected() && item.id !== row.id) {
+          //           item.toggleSelected();
+          //         }
+          //       });
+          //     },
+          // })}
         />
 
         <div className="urlslab-role-details">

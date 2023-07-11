@@ -18,10 +18,12 @@ export default function Table({
   returnTable,
   getRowExtraProps,
 }) {
-  const [rowSelection, setRowSelection] = useState({});
+  const [rowSelection, setRowSelection] = useState({0: true});
   const [containerWidth, setContainerWidth] = useState();
   const [columnVisibility, setColumnVisibility] = useState(initialState?.columnVisibility || {});
   const tableContainerRef = useRef();
+
+  // console.log('dataaaaaaaaaa', data?.[0].Capabilities , 'rowSelection', rowSelection);
 
   console.log('columnVisibility', columnVisibility);
 
