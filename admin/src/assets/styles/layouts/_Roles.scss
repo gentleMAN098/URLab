@@ -23,12 +23,18 @@
     column-gap: 10px;
     align-items: center;
   }
+  .urlslab-edit-container-input{
+    max-width: 360px;
+  }
   .urlslab-actionsbar {
     background-color: #fff;
     padding: 15px 25px;
     display: flex;
     gap: 8px;
     align-items: center;
+  }
+  .urlslab-actionsbar-detail{
+    margin-left: auto;
   }
   .urlslab-selection-details {
     display: flex;
@@ -45,6 +51,9 @@
     height: calc(100vh - var(--headerTopHeight) - var(--headerMenuHeight) - var(--headerBottomHeight) - 5em - 205px);
     overflow-y: scroll;
     @include scrollbar();
+  }
+  .urlslab-selected-capabilities-title{
+    margin-bottom: 15px;
   }
 
   .urlslab-capability-item {
