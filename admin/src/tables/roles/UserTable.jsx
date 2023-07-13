@@ -63,7 +63,7 @@ export default function UserTable() {
           columns={columns}
           data={!isLoading && roles.length ? roles : []}
         ></Table>
-        <div className="urlslab-detailsContainer">salam mn container hastam</div>
+        <div className="urlslab-detailsContainer">example</div>
       </div>
     </>
   );
