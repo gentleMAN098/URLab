@@ -7,7 +7,7 @@ export default function SelectedCapabilities( props ) {
 		<div className="urlslab-selected-capabilities">
 			<h5 className="urlslab-selected-capabilities-title">{ __( 'selected' ) }</h5>
 			{ selectedItems.map( ( item, index ) => (
-				<div key={ index } className="urlslab-capability-item">
+				<div key={ index } className="urlslab-selected-capability-item">
 					<label role="Controlled Checkbox" className="urlslab-checkbox">
 						<input
 							className="urlslab-checkbox-input"

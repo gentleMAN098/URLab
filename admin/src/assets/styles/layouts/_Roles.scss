@@ -68,6 +68,17 @@
       background-color: #edeff3;
     }
   }
+  .urlslab-selected-capability-item {
+    border: 1px solid #e4e5e9;
+    padding: 8px 15px;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    &:hover {
+      background-color: #edeff3;
+    }
+  }
 
   .urlslab-all-capabilities {
     padding: 15px 30px;
