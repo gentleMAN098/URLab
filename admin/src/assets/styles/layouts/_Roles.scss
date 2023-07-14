@@ -63,6 +63,7 @@
     background-color: #fff;
     font-size: 13px;
     font-weight: 600;
+    width: 30%;
     &:hover {
       background-color: #edeff3;
     }
@@ -78,6 +79,10 @@
     height: calc(100vh - var(--headerTopHeight) - var(--headerMenuHeight) - var(--headerBottomHeight) - 5em - 205px);
     overflow-y: scroll;
     @include scrollbar();
+  }
+  .urlslab-all-capabilities-header {
+    margin-bottom: 15px;
+    min-width: 100%;
   }
   @media (min-width: $breakpoint-tablet-landscape) {
   }
